@@ -1,0 +1,10 @@
+services:
+  bot:
+    build: .
+    network_mode: host
+    environment:
+      # Bypass Russia's Government restrictions
+      # hardcode, but it works
+      # will work only on my machine
+      - HTTP_PROXY=http://127.0.0.1:10808
+      - HTTPS_PROXY=http://127.0.0.1:10808
