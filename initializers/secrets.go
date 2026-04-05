@@ -12,6 +12,7 @@ func load(varn string) string {
 }
 
 var BotToken string
+var WeatherAPIToken string
 
 func InitializeSecrets() error {
 	err := godotenv.Load()
@@ -20,5 +21,6 @@ func InitializeSecrets() error {
 	}
 
 	BotToken = load("WEATHERIE_BOT_TOKEN")
+	WeatherAPIToken = load("WEATHER_API_TOKEN")
 	return nil
 }

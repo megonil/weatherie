@@ -17,7 +17,7 @@ func Start() {
 	defer cancel()
 
 	opts := []bot.Option{
-		bot.WithDefaultHandler(DefaultHandler),
+		bot.WithDefaultHandler(currentWeatherHandler),
 		bot.WithCheckInitTimeout(utils.Seconds(10)),
 	}
 
