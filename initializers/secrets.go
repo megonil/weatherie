@@ -2,25 +2,37 @@
 package initializers
 
 import (
+	"context"
 	"os"
-
-	"github.com/joho/godotenv"
+	"os/signal"
+	"strconv"
 )
+
+var Ctx, Cancel = signal.NotifyContext(context.Background(), os.Interrupt)
 
 func load(varn string) string {
 	return os.Getenv(varn)
 }
 
-var BotToken string
-var WeatherAPIToken string
+var (
+	BotToken        string
+	WeatherAPIToken string
+	RedisURL        string
+	RedisPass       string
+	RedisDBNum      int
+)
 
 func InitializeSecrets() error {
-	err := godotenv.Load()
+	var err error
+	BotToken = load("BOT_TOKEN")
+	WeatherAPIToken = load("WEATHER_API_TOKEN")
+	RedisURL = load("REDIS_URL")
+	RedisPass = load("REDIS_PASSWORD")
+	dbString := load("REDIS_DB")
+	RedisDBNum, err = strconv.Atoi(dbString)
 	if err != nil {
 		return err
 	}
 
-	BotToken = load("WEATHERIE_BOT_TOKEN")
-	WeatherAPIToken = load("WEATHER_API_TOKEN")
 	return nil
 }
